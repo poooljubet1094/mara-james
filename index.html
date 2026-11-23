@@ -301,18 +301,6 @@ h2{font:500 clamp(2.3rem,7vw,3.4rem)/1.08 var(--serif);color:var(--forest)}
 .map{display:block;width:100%;aspect-ratio:16/10;border:0;background:var(--cream-deep);filter:sepia(.2) saturate(.95)}
 
 /* ==========================================================================
-   Schedule timeline
-   ========================================================================== */
-.timeline{list-style:none;max-width:540px;margin:0 auto;padding:0;position:relative}
-.timeline::before{content:"";position:absolute;left:11px;top:.5rem;bottom:1rem;width:2px;border-radius:2px;background:linear-gradient(var(--gold),var(--orange),var(--maple))}
-.timeline li{position:relative;padding:0 0 2.1rem 3.1rem}
-.timeline li:last-child{padding-bottom:0}
-.timeline li::before{content:"";position:absolute;left:3px;top:.3rem;width:18px;height:18px;border-radius:50%;background:var(--cream);border:3px solid var(--maple)}
-.t-time{margin:0 0 .15rem;font:700 .76rem/1.8 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--maple)}
-.timeline h3{font:600 1.55rem/1.25 var(--serif);color:var(--forest)}
-.timeline p:last-child{margin:0}
-
-/* ==========================================================================
    Travel
    ========================================================================== */
 .travel{display:grid;gap:1.25rem}
@@ -405,6 +393,10 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
 .faq-item.open .faq-a{grid-template-rows:1fr}
 .faq-item.open .faq-a>div{visibility:visible}
 .faq-a p{margin:0;padding:0 .25rem 1.3rem}
+.palette-title{font:700 .74rem/1.4 var(--sans)!important;letter-spacing:.14em;text-transform:uppercase;color:var(--forest);padding-bottom:.7rem!important}
+.palette{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem;max-width:400px;margin:0;padding:0 .25rem 1.4rem}
+.palette li{text-align:center;font:400 .8rem/1.3 var(--sans)}
+.palette span{display:block;aspect-ratio:1;margin-bottom:.4rem;border-radius:10px;border:1px solid var(--line)}
 
 /* ==========================================================================
    Footer
@@ -503,7 +495,6 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
       <ul class="nav-links" id="navLinks">
         <li><a href="#story">Our Story</a></li>
         <li><a href="#celebration">Celebration</a></li>
-        <li><a href="#schedule">Schedule</a></li>
         <li><a href="#travel">Travel</a></li>
         <li><a href="#rsvp">RSVP</a></li>
         <li><a href="#gallery">Gallery</a></li>
@@ -579,8 +570,9 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
       <div class="chapter-text reveal">
         <p class="chapter-step">Chapter one</p>
         <h3>How We Met</h3>
-        <p class="chapter-when"><span class="ph">[Month, Year]</span></p>
-        <p><span class="ph ph-block">[Placeholder &mdash; How we met. Tell your guests where it all began: where you were, who spoke first, and the moment you knew this was something special.]</span></p>
+        <p class="chapter-when">A Saturday morning coffee date</p>
+        <p>It all started with a simple coffee date on a Saturday morning. James was a little shy and soft-spoken, while Mara helped bring him out of his shell. What was meant to be a casual coffee date turned into something even sweeter when we decided to continue our morning with a trail walk.</p>
+        <p>Little did we know that one simple coffee date would turn into a lifetime of love, laughter, and beautiful memories. From that fateful Saturday morning, we&rsquo;ve been together ever since. And now, we&rsquo;re excited to begin our next adventure as husband and wife!</p>
       </div>
       <div class="pair reveal" style="--rd:.15s">
         <button class="frame" type="button" data-lb style="--ar:3/4">
@@ -600,8 +592,11 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
       <div class="chapter-text reveal">
         <p class="chapter-step">Chapter two</p>
         <h3>The Proposal</h3>
-        <p class="chapter-when"><span class="ph">[Month, Year]</span></p>
-        <p><span class="ph ph-block">[Placeholder &mdash; The proposal. Share the moment: where you were, what was said, and how it felt to say yes.]</span></p>
+        <p class="chapter-when">Easter weekend &middot; The Outer Banks</p>
+        <p>James originally planned to pop the question on Easter Sunday during our spring break camping trip to the Outer Banks. But love had other plans! Overcome with nerves and excitement, he couldn&rsquo;t wait until Sunday and decided to ask the big question on Saturday, the very day we arrived.</p>
+        <p>It was an intimate and beautiful moment, just the two of us sharing dinner together. With a homemade taste of adobo, the perfect twilight, and all the love in his heart, James said, <em>&ldquo;Even if we have to eat adobo every day&hellip;&rdquo;</em> and asked Mara to spend forever with him.</p>
+        <p>What followed were happy tears, unforgettable emotions, and a heartfelt &ldquo;yes!&rdquo; It wasn&rsquo;t the proposal James originally planned, but it became a moment more beautiful than either of us could have imagined.</p>
+        <p>And just like that, our forever began!</p>
       </div>
       <div class="pair reveal" style="--rd:.15s">
         <button class="frame" type="button" data-lb style="--ar:3/4">
@@ -644,7 +639,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
         <div class="card-body">
           <p class="card-kicker">The Ceremony</p>
           <h3>St. Michael Catholic Church</h3>
-          <p class="card-time">Saturday, January 23, 2027<br><span class="ph">[Ceremony time]</span></p>
+          <p class="card-time">Saturday, January 23, 2027<br>1:00 PM</p>
           <address>708 St Michaels Ln<br>Gastonia, NC 28052</address>
           <a class="btn" target="_blank" rel="noopener"
              href="https://www.google.com/maps/dir/?api=1&amp;destination=St.%20Michael%20Catholic%20Church%2C%20708%20St%20Michaels%20Ln%2C%20Gastonia%2C%20NC%2028052">
@@ -657,7 +652,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
         <div class="card-body">
           <p class="card-kicker">The Reception</p>
           <h3>Rankin Lake Clubhouse</h3>
-          <p class="card-time">Saturday, January 23, 2027<br><span class="ph">[Reception time]</span></p>
+          <p class="card-time">Saturday, January 23, 2027<br>3:00 PM</p>
           <address>1750 Rankin Lake Rd<br>Gastonia, NC 28052</address>
           <a class="btn" target="_blank" rel="noopener"
              href="https://www.google.com/maps/dir/?api=1&amp;destination=Rankin%20Lake%20Clubhouse%2C%201750%20Rankin%20Lake%20Rd%2C%20Gastonia%2C%20NC%2028052">
@@ -671,49 +666,9 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
 </section>
 
 <!-- =====================================================================
-     6. SCHEDULE OF THE DAY
+     6. TRAVEL & STAY
      ===================================================================== -->
-<section class="section" id="schedule">
-  <div class="wrap">
-    <div class="head reveal">
-      <p class="eyebrow">Schedule</p>
-      <h2>The Day</h2>
-      <div class="divider" aria-hidden="true"><svg class="lf" viewBox="0 0 100 100"><use href="#leaf"/></svg></div>
-    </div>
-    <ol class="timeline">
-      <li class="reveal">
-        <p class="t-time"><span class="ph">[Ceremony time]</span></p>
-        <h3>Ceremony</h3>
-        <p>St. Michael Catholic Church</p>
-      </li>
-      <li class="reveal">
-        <p class="t-time"><span class="ph">[Time]</span></p>
-        <h3><span class="ph">[Schedule item, e.g. cocktail hour]</span></h3>
-        <p><span class="ph">[Location / details]</span></p>
-      </li>
-      <li class="reveal">
-        <p class="t-time"><span class="ph">[Reception time]</span></p>
-        <h3>Reception</h3>
-        <p>Rankin Lake Clubhouse</p>
-      </li>
-      <li class="reveal">
-        <p class="t-time"><span class="ph">[Time]</span></p>
-        <h3><span class="ph">[Schedule item, e.g. dinner &amp; toasts]</span></h3>
-        <p><span class="ph">[Details]</span></p>
-      </li>
-      <li class="reveal">
-        <p class="t-time"><span class="ph">[Time]</span></p>
-        <h3><span class="ph">[Schedule item, e.g. send-off]</span></h3>
-        <p><span class="ph">[Details]</span></p>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<!-- =====================================================================
-     7. TRAVEL & STAY
-     ===================================================================== -->
-<section class="section knit" id="travel">
+<section class="section" id="travel">
   <div class="wrap">
     <div class="head reveal">
       <p class="eyebrow">Travel &amp; Stay</p>
@@ -725,22 +680,20 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-plane"/></svg>
         <h3>Flying In</h3>
         <p>Charlotte Douglas International Airport (CLT) is the nearest major airport.</p>
-        <p><span class="ph">[Drive time from CLT to Gastonia]</span></p>
-        <p><span class="ph">[Rental car / rideshare notes]</span></p>
+        <p>It&rsquo;s about 18 miles from CLT to downtown Gastonia.</p>
+        <p>Rental cars are available at the airport.</p>
       </article>
       <article class="t-card reveal" style="--rd:.12s">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-bed"/></svg>
         <h3>Where to Stay</h3>
-        <p><span class="ph">[Hotel 1 name]</span></p>
-        <p><span class="ph">[Hotel 1 address]</span></p>
-        <p><span class="ph">[Room block details / booking link]</span></p>
+        <p><strong>Comfort Suites Gastonia</strong></p>
+        <p><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Comfort%20Suites%20Gastonia%2C%201874%20Remount%20Rd%2C%20Gastonia%2C%20NC%2028054">1874 Remount Rd<br>Gastonia, NC 28054</a></p>
       </article>
       <article class="t-card reveal" style="--rd:.24s">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-bed"/></svg>
         <h3>Another Option</h3>
-        <p><span class="ph">[Hotel 2 name]</span></p>
-        <p><span class="ph">[Hotel 2 address]</span></p>
-        <p><span class="ph">[Room block details / booking link]</span></p>
+        <p><strong>Hilton Garden Inn Gastonia</strong></p>
+        <p><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Hilton%20Garden%20Inn%20Gastonia%2C%20444%20Cox%20Rd%2C%20Gastonia%2C%20NC%2028054">444 Cox Road<br>Gastonia, NC 28054</a></p>
       </article>
     </div>
   </div>
@@ -912,19 +865,31 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
     <div class="faq reveal">
       <div class="faq-item">
         <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="faq1" id="faq1b">What should I wear?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></h3>
-        <div class="faq-a" id="faq1" role="region" aria-labelledby="faq1b"><div><p><span class="ph">[Dress code]</span></p></div></div>
+        <div class="faq-a" id="faq1" role="region" aria-labelledby="faq1b"><div>
+          <p>We kindly invite our guests to dress in semi-formal attire. Cocktail dresses, dressy jumpsuits, and dress pants are welcome. In keeping with our winter wedding theme, burgundy, cream, and other complementary winter tones are welcome.</p>
+          <p class="palette-title">Suggested color palette</p>
+          <ul class="palette">
+            <li><span style="background:#7D0020"></span>Burgundy</li>
+            <li><span style="background:#F4EFE6"></span>Cream</li>
+            <li><span style="background:#B5A088"></span>Champagne</li>
+            <li><span style="background:#24372D"></span>Forest Green</li>
+          </ul>
+        </div></div>
       </div>
       <div class="faq-item">
         <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="faq2" id="faq2b">Are kids welcome?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></h3>
-        <div class="faq-a" id="faq2" role="region" aria-labelledby="faq2b"><div><p><span class="ph">[Children policy]</span></p></div></div>
+        <div class="faq-a" id="faq2" role="region" aria-labelledby="faq2b"><div><p>We are happy to celebrate our special day with the whole family. Children are warmly welcome to join us!</p></div></div>
       </div>
       <div class="faq-item">
         <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="faq3" id="faq3b">Where do I park?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></h3>
-        <div class="faq-a" id="faq3" role="region" aria-labelledby="faq3b"><div><p><span class="ph">[Parking details for the church and the clubhouse]</span></p></div></div>
+        <div class="faq-a" id="faq3" role="region" aria-labelledby="faq3b"><div><p>Parking is available at both the ceremony and reception venues.</p></div></div>
       </div>
       <div class="faq-item">
         <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="faq4" id="faq4b">What about gifts?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></h3>
-        <div class="faq-a" id="faq4" role="region" aria-labelledby="faq4b"><div><p><span class="ph">[Gift / registry information]</span></p></div></div>
+        <div class="faq-a" id="faq4" role="region" aria-labelledby="faq4b"><div>
+          <p>Your presence at our wedding is the greatest gift of all. For those who wish to bless us with a gift, we have created a registry for your convenience. Thank you for being part of our special day!</p>
+          <p><a class="btn" target="_blank" rel="noopener" href="https://www.amazon.com/wedding/guest-view/3N6KO5PFHJY2P">View Our Registry<span class="sr"> (opens Amazon)</span></a></p>
+        </div></div>
       </div>
     </div>
   </div>
@@ -987,11 +952,9 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
      SETTINGS: the things you are most likely to edit
      ====================================================================== */
   var CONFIG = {
-    /* Countdown target, in America/New_York time (January = EST = UTC-05:00).
-       It currently counts down to the START of the wedding day because the ceremony
-       time is still a placeholder. Once you know it, put it here,
-       e.g. '2027-01-23T14:00:00-05:00' for 2:00 PM. */
-    countdownTarget: '2027-01-23T00:00:00-05:00',
+    /* Countdown target, in America/New_York time (January = EST = UTC-05:00):
+       the 1:00 PM ceremony. */
+    countdownTarget: '2027-01-23T13:00:00-05:00',
     /* From this moment on the countdown reads "Just married!" (the day after).
        Between the two it reads "Today's the day!". */
     justMarriedFrom: '2027-01-24T00:00:00-05:00',
@@ -1372,9 +1335,10 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
 
   /* ----------------------------------------------------------------------
      Add to Calendar (.ics)
-     All-day event for now, because the times are still placeholders. Once you
-     know them, swap the two DTSTART/DTEND lines for timed ones, e.g.
-       'DTSTART;TZID=America/New_York:20270123T140000',
+     All-day event, with the ceremony and reception times in the description
+     (no end time has been set). For a timed event, swap the two DTSTART/DTEND
+     lines for timed ones, e.g.
+       'DTSTART;TZID=America/New_York:20270123T130000',
        'DTEND;TZID=America/New_York:20270123T220000',
      ---------------------------------------------------------------------- */
   (function () {
@@ -1394,7 +1358,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
       'DTEND;VALUE=DATE:20270124',
       'SUMMARY:Mara & James’s Wedding',
       'LOCATION:St. Michael Catholic Church\\, 708 St Michaels Ln\\, Gastonia\\, NC 28052',
-      'DESCRIPTION:Ceremony: St. Michael Catholic Church\\, 708 St Michaels Ln\\, Gastonia\\, NC 28052\\nReception: Rankin Lake Clubhouse\\, 1750 Rankin Lake Rd\\, Gastonia\\, NC 28052',
+      'DESCRIPTION:Ceremony 1:00 PM: St. Michael Catholic Church\\, 708 St Michaels Ln\\, Gastonia\\, NC 28052\\nReception 3:00 PM: Rankin Lake Clubhouse\\, 1750 Rankin Lake Rd\\, Gastonia\\, NC 28052',
       'TRANSP:TRANSPARENT',
       'END:VEVENT',
       'END:VCALENDAR'
