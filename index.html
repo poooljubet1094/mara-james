@@ -785,7 +785,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
       <h2>Will You Join Us?</h2>
       <div class="divider" aria-hidden="true"><svg class="lf" viewBox="0 0 100 100"><use href="#leaf"/></svg></div>
     </div>
-    <p class="rsvp-by reveal">Kindly reply by Saturday, January 16, 2027</p>
+    <p class="rsvp-by reveal" id="rsvpBy">Kindly reply by Thursday, December 31, 2026</p>
 
     <div class="form-card reveal">
       <form id="rsvpForm" novalidate>
@@ -814,16 +814,6 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
             <!-- max="10" is only a technical cap: set it to your own per-invite limit -->
             <input id="fGuests" name="guests" type="number" inputmode="numeric" min="1" max="10" value="1">
           </div>
-          <div class="field">
-            <label for="fMeal">Meal preference</label>
-            <select id="fMeal" name="meal">
-              <option value="">Select&hellip;</option>
-              <!-- PLACEHOLDER: replace with your real menu options -->
-              <option>[Meal option 1]</option>
-              <option>[Meal option 2]</option>
-              <option>[Meal option 3]</option>
-            </select>
-          </div>
         </div>
 
         <div class="field">
@@ -848,6 +838,13 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
         <h3 id="thanksTitle">Thank you!</h3>
         <p id="thanksText"></p>
         <p class="demo-note" id="demoNote" hidden>Preview mode: no RSVP endpoint is connected yet, so nothing was actually sent. Add one in the script (search for &ldquo;RSVP ENDPOINT&rdquo;).</p>
+      </div>
+
+      <!-- Shown instead of the form once CONFIG.rsvpClosesAt has passed -->
+      <div class="thanks" id="rsvpClosed" role="status" hidden>
+        <svg class="lf" viewBox="0 0 100 100" aria-hidden="true"><use href="#leaf"/></svg>
+        <h3>RSVPs are closed</h3>
+        <p>Our RSVP deadline was December 31, 2026. Thank you to everyone who replied. If you still need to reach us, please contact Mara or James directly.</p>
       </div>
     </div>
   </div>
@@ -1039,6 +1036,11 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
     youtubeId: 'B3DvnyeD6sk',
     volume: 40, /* 0 to 100 */
 
+    /* RSVP deadline: the form closes at this moment (the end of Thursday,
+       December 31, 2026, America/New_York time). If you change it, also
+       update the "Kindly reply by" line and the "RSVPs are closed" text. */
+    rsvpClosesAt: '2027-01-01T00:00:00-05:00',
+
     /* ====================================================================
        RSVP ENDPOINT  <-- PLUG YOUR FORM BACKEND IN HERE
        --------------------------------------------------------------------
@@ -1049,18 +1051,26 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
          similar services that accept a normal form POST work the same way.)
 
        Option B, Google Forms:
-         1. Build a Google Form with the same seven questions.
+         1. Build a Google Form with the same six questions (all Short answer
+            / Paragraph, none Required).
          2. rsvpEndpoint: 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse'
          3. Fill googleFormFields with each question's "entry.123456" id
             (Form menu > Get pre-filled link shows them), e.g.
             googleFormFields: { name:'entry.111', email:'entry.222', attending:'entry.333',
-                                guests:'entry.444', meal:'entry.555', song:'entry.666', note:'entry.777' }
+                                guests:'entry.444', song:'entry.555', note:'entry.666' }
 
        While rsvpEndpoint is empty the form runs in PREVIEW MODE: it shows the
        thank-you screen with a visible warning and sends nothing.
        ==================================================================== */
-    rsvpEndpoint: '',
-    googleFormFields: null
+    rsvpEndpoint: 'https://docs.google.com/forms/d/e/1FAIpQLSfrDubcng1zJwM2lks6y5u2BonkGiIWtjZTxWikLKQNdTn02A/formResponse',
+    googleFormFields: {
+      name:      'entry.2124937457',
+      email:     'entry.1807087465',
+      attending: 'entry.1185736238',
+      guests:    'entry.1828658078',
+      song:      'entry.1141103092',
+      note:      'entry.1387328554'
+    }
   };
 
   var doc = document, root = doc.documentElement;
@@ -1284,8 +1294,18 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
   (function () {
     var form = $('#rsvpForm'), btn = $('#rsvpBtn'), msg = $('#rsvpMsg'), thanks = $('#rsvpThanks');
     var guestFields = $('#guestFields');
+    var closesAt = Date.parse(CONFIG.rsvpClosesAt);
 
-    /* Guests + meal only matter when attending */
+    function isClosed() { return Date.now() >= closesAt; }
+    function showClosed() {
+      form.hidden = true;
+      thanks.hidden = true;
+      $('#rsvpBy').hidden = true;
+      $('#rsvpClosed').hidden = false;
+    }
+    if (isClosed()) { showClosed(); }
+
+    /* Guest count only matters when attending */
     $$('input[name=attending]', form).forEach(function (r) {
       r.addEventListener('change', function () {
         var no = r.checked && r.value === 'no';
@@ -1310,6 +1330,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       msg.hidden = true;
+      if (isClosed()) { showClosed(); return; }   /* page was left open past the deadline */
       if (!form.checkValidity()) { form.reportValidity(); return; }
       var data = new FormData(form);
       var first = String(data.get('name') || '').trim().split(/\s+/)[0];
